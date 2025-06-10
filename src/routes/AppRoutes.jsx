@@ -1,55 +1,53 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import AddListing from '../pages/AddListing';
-import AdminDashboard from '../pages/AdminDashboard';
-import AdminLogin from '../pages/AdminLogin';
-import Booking from '../pages/Booking';
-import BookingConfirmation from '../pages/BookingConfirmation';
-import Confirmation from '../pages/Confirmation';
-import EditListing from '../pages/EditListing';
-import Home from '../pages/Home';
-import Listing from '../pages/Listing';
-import ManageBookings from '../pages/ManageBookings';
-import ManageCommissions from '../pages/ManageCommissions';
-import ManageHomepageAds from '../pages/ManageHomepageAds';
-import ManageListings from '../pages/ManageListings';
-import ManageSuppliers from '../pages/ManageSuppliers';
-import ManageUsers from '../pages/ManageUsers';
-import NotFound from '../pages/NotFound';
-import PaymentConfirmation from '../pages/PaymentConfirmation';
-import RevenueReport from '../pages/RevenueReport';
-import SupplierBookings from '../pages/SupplierBookings';
-import SupplierDashboard from '../pages/SupplierDashboard';
-import TermsAndConditions from '../pages/TermsAndConditions';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import AddListing from "../pages/AddListing.jsx";
+import AdminDashboard from "../pages/AdminDashboard.jsx";
+import AdminLogin from "../pages/AdminLogin.jsx";
+import Booking from "../pages/Booking.jsx";
+import BookingConfirmation from "../pages/BookingConfirmation.jsx";
+import Confirmation from "../pages/Confirmation.jsx";
+import EditListing from "../pages/EditListing.jsx";
+import Home from "../pages/Home.jsx";
+import Listing from "../pages/Listing.jsx";
+import ManageBookings from "../pages/ManageBookings.jsx";
+import ManageCommissions from "../pages/ManageCommissions.jsx";
+import ManageHomepageAds from "../pages/ManageHomepageAds.jsx";
+import ManageListings from "../pages/ManageListings.jsx";
+import ManageSuppliers from "../pages/ManageSuppliers.jsx";
+import ManageUsers from "../pages/ManageUsers.jsx";
+import NotFound from "../pages/NotFound.jsx";
+import PaymentConfirmation from "../pages/PaymentConfirmation.jsx";
+import RevenueReport from "../pages/RevenueReport.jsx";
+import SupplierBookings from "../pages/SupplierBookings.jsx";
+import SupplierDashboard from "../pages/SupplierDashboard.jsx";
+import TermsAndConditions from "../pages/TermsAndConditions.jsx";
 
 const AppRoutes = () => {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/listing" element={<Listing />} />
+    return (
+        <Routes>
+        <Route path="/addlisting" element={<AddListing />} />
+        <Route path="/admindashboard" element={<AdminDashboard />} />
+        <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/booking" element={<Booking />} />
-        <Route path="/booking/confirmation" element={<BookingConfirmation />} />
+        <Route path="/bookingconfirmation" element={<BookingConfirmation />} />
         <Route path="/confirmation" element={<Confirmation />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-        <Route path="/admin/manage-users" element={<ManageUsers />} />
-        <Route path="/admin/manage-suppliers" element={<ManageSuppliers />} />
-        <Route path="/admin/manage-bookings" element={<ManageBookings />} />
-        <Route path="/admin/manage-commissions" element={<ManageCommissions />} />
-        <Route path="/admin/manage-listings" element={<ManageListings />} />
-        <Route path="/admin/manage-ads" element={<ManageHomepageAds />} />
-        <Route path="/admin/revenue-report" element={<RevenueReport />} />
-        <Route path="/supplier/dashboard" element={<SupplierDashboard />} />
-        <Route path="/supplier/bookings" element={<SupplierBookings />} />
-        <Route path="/supplier/add-listing" element={<AddListing />} />
-        <Route path="/supplier/edit-listing" element={<EditListing />} />
-        <Route path="/payment-confirmation" element={<PaymentConfirmation />} />
-        <Route path="/terms" element={<TermsAndConditions />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
-  );
-}
+        <Route path="/editlisting" element={<EditListing />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/listing" element={<Listing />} />
+        <Route path="/managebookings" element={<ManageBookings />} />
+        <Route path="/managecommissions" element={<ManageCommissions />} />
+        <Route path="/managehomepageads" element={<ManageHomepageAds />} />
+        <Route path="/managelistings" element={<ManageListings />} />
+        <Route path="/managesuppliers" element={<ManageSuppliers />} />
+        <Route path="/manageusers" element={<ManageUsers />} />
+        <Route path="/notfound" element={<NotFound />} />
+        <Route path="/paymentconfirmation" element={<PaymentConfirmation />} />
+        <Route path="/revenuereport" element={<RevenueReport />} />
+        <Route path="/supplierbookings" element={<SupplierBookings />} />
+        <Route path="/supplierdashboard" element={<SupplierDashboard />} />
+        <Route path="/termsandconditions" element={<TermsAndConditions />} />
+        </Routes>
+    );
+};
 
 export default AppRoutes;
