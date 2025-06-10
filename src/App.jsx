@@ -1,11 +1,14 @@
 import React from "react";
-import AppRoutes from "./AppRoutes";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import AppRoutes from "./routes/AppRoutes";
 
 function App() {
   return (
-    <div className="bg-gray-50 min-h-screen text-gray-900">
-      <AppRoutes />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/*" element={<AppRoutes />} />
+      </Routes>
+    </Router>
   );
 }
 
