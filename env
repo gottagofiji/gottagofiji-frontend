@@ -1,0 +1,4 @@
+VITE_APP_TITLE=GOTTAGOFIJI
+MONGO_URI=mongodb+srv://shabeelshah:<db_password>@gottagofiji.xqnqqpi.mongodb.net/?retryWrites=true&w=majority&appName=gottagofiji
+JWT_SECRET=supersecretjwtkey
+EMAIL_FROM=no-reply@gottagofiji.com
