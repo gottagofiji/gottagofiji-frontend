@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -6,73 +7,75 @@ const ManageListings = () => {
 
   useEffect(() => {
     const fetchListings = async () => {
-      const res = await axios.get("/api/admin/listings");
-      setListings(res.data);
+      try {
+        const response = await axios.get("/api/admin/listings");
+        setListings(response.data);
+      } catch (error) {
+        console.error("Error fetching listings:", error);
+      }
     };
+
     fetchListings();
   }, []);
 
   const handleApprove = async (id) => {
-    await axios.patch(\`/api/admin/listings/\${id}/approve\`);
-    setListings(listings.map(l => l._id === id ? { ...l, approved: true } : l));
+    try {
+      await axios.patch(`/api/admin/listings/${id}/approve`);
+      setListings(listings.map(l => l._id === id ? { ...l, approved: true } : l));
+    } catch (error) {
+      console.error("Error approving listing:", error);
+    }
   };
 
-  const handleDecline = async (id) => {
-    await axios.delete(\`/api/admin/listings/\${id}\`);
-    setListings(listings.filter(l => l._id !== id));
+  const handleReject = async (id) => {
+    try {
+      await axios.patch(`/api/admin/listings/${id}/reject`);
+      setListings(listings.map(l => l._id === id ? { ...l, approved: false } : l));
+    } catch (error) {
+      console.error("Error rejecting listing:", error);
+    }
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4 text-center">Approve Listings</h1>
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white rounded shadow">
-          <thead className="bg-gray-200">
-            <tr>
-              <th className="py-2 px-4">Title</th>
-              <th className="py-2 px-4">Supplier</th>
-              <th className="py-2 px-4">Type</th>
-              <th className="py-2 px-4">Status</th>
-              <th className="py-2 px-4">Actions</th>
+    <div className="p-4">
+      <h1 className="text-xl font-bold mb-4">Manage Listings</h1>
+      <table className="min-w-full table-auto border-collapse border border-gray-200">
+        <thead>
+          <tr>
+            <th className="border border-gray-300 px-4 py-2">Title</th>
+            <th className="border border-gray-300 px-4 py-2">Supplier</th>
+            <th className="border border-gray-300 px-4 py-2">Status</th>
+            <th className="border border-gray-300 px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {listings.map((listing) => (
+            <tr key={listing._id}>
+              <td className="border border-gray-300 px-4 py-2">{listing.title}</td>
+              <td className="border border-gray-300 px-4 py-2">{listing.supplierName}</td>
+              <td className="border border-gray-300 px-4 py-2">
+                {listing.approved ? "Approved" : "Pending"}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {!listing.approved && (
+                  <button
+                    onClick={() => handleApprove(listing._id)}
+                    className="bg-green-500 text-white px-2 py-1 rounded mr-2"
+                  >
+                    Approve
+                  </button>
+                )}
+                <button
+                  onClick={() => handleReject(listing._id)}
+                  className="bg-red-500 text-white px-2 py-1 rounded"
+                >
+                  Reject
+                </button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {listings.map((l) => (
-              <tr key={l._id} className="text-center">
-                <td className="py-2 px-4">{l.title}</td>
-                <td className="py-2 px-4">{l.supplier?.name || "N/A"}</td>
-                <td className="py-2 px-4 capitalize">{l.type}</td>
-                <td className="py-2 px-4">{l.approved ? "Approved" : "Pending"}</td>
-                <td className="py-2 px-4">
-                  {!l.approved && (
-                    <>
-                      <button
-                        className="bg-green-600 text-white px-3 py-1 rounded mr-2"
-                        onClick={() => handleApprove(l._id)}
-                      >
-                        Approve
-                      </button>
-                      <button
-                        className="bg-red-500 text-white px-3 py-1 rounded"
-                        onClick={() => handleDecline(l._id)}
-                      >
-                        Decline
-                      </button>
-                    </>
-                  )}
-                </td>
-              </tr>
-            ))}
-            {!listings.length && (
-              <tr>
-                <td colSpan="5" className="py-4 text-center text-gray-500">
-                  No listings pending approval.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
