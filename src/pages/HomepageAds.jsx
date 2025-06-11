@@ -1,0 +1,1 @@
+// Placeholder content for HomepageAds.jsx
